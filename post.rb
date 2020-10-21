@@ -5,6 +5,15 @@ class Post
     @text = nil
   end
 
+  def self.post_types
+    [Memo, Link, Task]
+  end
+
+  def self.create(type_index)
+    return post_types[type_index].new
+  end
+
+
   def read_from_console
     # todo
   end
@@ -16,7 +25,7 @@ class Post
   def save
     file = File.new(file_path, 'w:UTF-8')
 
-    each.to_strings do |item|
+    to_strings.each do |item|
       file.puts item
     end
 
